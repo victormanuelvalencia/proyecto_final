@@ -3,11 +3,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    width: 100%;
     background-color: #f9f9f9;
     color: #333;
     overflow-x: hidden;
-    align-items: center;
     text-align: center;
 }
 
@@ -32,10 +30,6 @@ header {
     padding: 20px;
 }
 
-main {
-    padding: 20px;
-}
-
 h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
@@ -52,21 +46,21 @@ h2 {
 }
 
 p {
-    font-size: 1.2em; /* Tamaño estándar */
-    line-height: 1.6; /* Mayor espacio entre líneas para mejor legibilidad */
+    font-size: 1.2em;
+    line-height: 1.6; 
     color: #666;
+}
+
+main {
+    padding: 20px;
 }
 
 section {
     margin: 20px 0;
-}
-
-#visualizacion-datos, #simulador {
-    border: 1px solid #ccc;
     padding: 20px;
+    border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
-    margin-bottom: 30px;
 }
 
 #form-simulador {
@@ -77,12 +71,12 @@ section {
 }
 
 #consumo {
-    padding: 10px; /* Aumenta el padding interno para que sea más grande */
-    width: 100%; /* Ocupa el 100% del ancho del contenedor padre */
-    max-width: 200px; /* Ajusta el tamaño máximo si no quieres que sea demasiado grande */
-    border: 2px solid #4CAF50; /* Borde del mismo color verde */
+    padding: 10px;
+    width: 100%; 
+    max-width: 200px;
+    border: 2px solid #4CAF50; 
     border-radius: 5px;
-    font-size: 0.9em; /* Aumenta el tamaño de la fuente */
+    font-size: 0.9em;
 }
 
 
@@ -109,7 +103,6 @@ footer {
     background-color: #333;
     color: white;
     padding: 10px;
-    bottom: 0;
     width: 100%;
 } 
 
