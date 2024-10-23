@@ -1,0 +1,101 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Responsive: El contenedor ocupa el 100% en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 95%;
+    }
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+section {
+    margin: 20px 0;
+}
+
+#visualizacion-datos, #simulador {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 30px;
+}
+
+#form-simulador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} */
+
+footer {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#grafico-barra, #grafico-linea {
+    margin-top: 20px;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+.line {
+    fill: none;
+    stroke: orange;
+    stroke-width: 2;
+}
