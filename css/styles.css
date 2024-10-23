@@ -3,15 +3,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    width: 100%;
     background-color: #f9f9f9;
     color: #333;
+    overflow-x: hidden;
+    align-items: center;
+    text-align: center;
 }
 
 /* Contenedor principal */
 .container {
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
@@ -26,15 +30,31 @@ header {
     background-color: #4CAF50;
     color: white;
     padding: 20px;
-    text-align: center;
 }
 
 main {
     padding: 20px;
 }
 
-h1, h2 {
-    text-align: center;
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+}
+    
+    
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #4CAF50;
+}
+
+p {
+    font-size: 1.2em; /* Tamaño estándar */
+    line-height: 1.6; /* Mayor espacio entre líneas para mejor legibilidad */
+    color: #666;
 }
 
 section {
@@ -52,42 +72,51 @@ section {
 #form-simulador {
     display: flex;
     flex-direction: column;
+    gap: 15px;
     align-items: center;
-    gap: 10px;
 }
 
+#consumo {
+    padding: 10px; /* Aumenta el padding interno para que sea más grande */
+    width: 100%; /* Ocupa el 100% del ancho del contenedor padre */
+    max-width: 200px; /* Ajusta el tamaño máximo si no quieres que sea demasiado grande */
+    border: 2px solid #4CAF50; /* Borde del mismo color verde */
+    border-radius: 5px;
+    font-size: 0.9em; /* Aumenta el tamaño de la fuente */
+}
+
+
+#resultado-simulador {
+    margin-top: 15px; /* Espacio entre el botón y el resultado */
+    font-size: 1.2em; /* Tamaño de fuente ligeramente más grande */
+    color: #4CAF50; /* Color verde para el resultado */
+}
+
+
 button {
+    font-size: 1.2em; /* Botón más grande y visible */
     padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 225px;
 }
 
-button:hover {
-    background-color: #45a049;
-}
-
-/* footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-} */
 
 footer {
     background-color: #333;
     color: white;
-    display: flex;
-    justify-content: center;
-}
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+} 
 
-#grafico-barra, #grafico-linea {
+#grafico-barra svg, #grafico-linea svg, #grafico-barra-biomass svg, #grafico-linea-hydro svg{
     margin-top: 20px;
+    width: 100%;
+    height: 500px;
 }
 
 .bar {

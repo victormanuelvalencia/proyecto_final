@@ -9,97 +9,224 @@ d3.csv("data/modern-renewable-energy-consumption.csv").then(function(data) {
         d.Year = +d.Year;
     });
 
-    // Gráfico de barras para "Solar Generation - TWh"
-    const svgBarra = d3.select("#grafico-barra")
-        .append("svg")
-        .attr("width", 600)
-        .attr("height", 400);
+    // Definir ancho dinámico basado en el contenedor
+    function getWidth(selector) {
+        return d3.select(selector).node().getBoundingClientRect().width;
+    }
 
-    const xScale = d3.scaleBand()
-        .domain(data.map(d => d.Year))
-        .range([50, 550]) // Ajustar para dejar espacio para las etiquetas
-        .padding(0.1);
+    // Función para actualizar el gráfico de barras para "Solar Generation - TWh"
+    function drawBarChart() {
+        const width = getWidth("#grafico-barra");
+        const height = 400;
 
-    const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d["Solar Generation - TWh"])])
-        .range([350, 50]); // Ajustar para dejar espacio para las etiquetas
+        const svgBarra = d3.select("#grafico-barra")
+            .html("") // Limpiar el contenido previo
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-    svgBarra.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", d => xScale(d.Year))
-        .attr("y", d => yScale(d["Solar Generation - TWh"]))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => 350 - yScale(d["Solar Generation - TWh"]))
-        .attr("fill", "steelblue");
+        const xScale = d3.scaleBand()
+            .domain(data.map(d => d.Year))
+            .range([50, width - 50])
+            .padding(0.1);
 
-    // Añadir ejes
-    svgBarra.append("g")
-        .attr("transform", "translate(0, 350)") // Mover el eje a la parte inferior
-        .call(d3.axisBottom(xScale));
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d["Solar Generation - TWh"])])
+            .range([height - 50, 50]);
 
-    svgBarra.append("g")
-        .attr("transform", "translate(50, 0)") // Mover el eje izquierdo
-        .call(d3.axisLeft(yScale));
+        svgBarra.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.Year))
+            .attr("y", d => yScale(d["Solar Generation - TWh"]))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => height - 50 - yScale(d["Solar Generation - TWh"]))
+            .attr("fill", "steelblue");
 
-    // Añadir etiquetas a los ejes
-    svgBarra.append("text")
-        .attr("transform", "translate(300, 390)") // Centrar bajo el gráfico
-        .style("text-anchor", "middle")
-        .text("Año");
+        svgBarra.append("g")
+            .attr("transform", `translate(0, ${height - 50})`)
+            .call(d3.axisBottom(xScale));
 
-    svgBarra.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -200)
-        .attr("y", 15)
-        .style("text-anchor", "middle")
-        .text("Generación Solar (TWh)");
+        svgBarra.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(yScale));
 
-    // Gráfico de líneas para "Wind Generation - TWh"
-    const svgLinea = d3.select("#grafico-linea")
-        .append("svg")
-        .attr("width", 600)
-        .attr("height", 400);
+        svgBarra.append("text")
+            .attr("transform", `translate(${width / 2}, ${height - 10})`)
+            .style("text-anchor", "middle")
+            .text("Año");
 
-    const yScaleWind = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d["Wind Generation - TWh"])])
-        .range([350, 50]);
+        svgBarra.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -(height / 2))
+            .attr("y", 15)
+            .style("text-anchor", "middle")
+            .text("Generación Solar (TWh)");
+    }
 
-    const line = d3.line()
-        .x(d => xScale(d.Year))
-        .y(d => yScaleWind(d["Wind Generation - TWh"]));
+    // Función para actualizar el gráfico de líneas para "Wind Generation - TWh"
+    function drawLineChart() {
+        const width = getWidth("#grafico-linea");
+        const height = 400;
 
-    svgLinea.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "orange")
-        .attr("stroke-width", 2)
-        .attr("d", line);
+        const svgLinea = d3.select("#grafico-linea")
+            .html("") // Limpiar el contenido previo
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-    // Añadir ejes
-    svgLinea.append("g")
-        .attr("transform", "translate(0, 350)")
-        .call(d3.axisBottom(xScale));
+        const xScale = d3.scaleBand()
+            .domain(data.map(d => d.Year))
+            .range([50, width - 50]);
 
-    svgLinea.append("g")
-        .attr("transform", "translate(50, 0)")
-        .call(d3.axisLeft(yScaleWind));
+        const yScaleWind = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d["Wind Generation - TWh"])])
+            .range([height - 50, 50]);
 
-    // Añadir etiquetas a los ejes del gráfico de líneas
-    svgLinea.append("text")
-        .attr("transform", "translate(300, 390)")
-        .style("text-anchor", "middle")
-        .text("Año");
+        const line = d3.line()
+            .x(d => xScale(d.Year))
+            .y(d => yScaleWind(d["Wind Generation - TWh"]));
 
-    svgLinea.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -200)
-        .attr("y", 15)
-        .style("text-anchor", "middle")
-        .text("Generación Eólica (TWh)");
-});
+        svgLinea.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "orange")
+            .attr("stroke-width", 2)
+            .attr("d", line);
+
+        svgLinea.append("g")
+            .attr("transform", `translate(0, ${height - 50})`)
+            .call(d3.axisBottom(xScale));
+
+        svgLinea.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(yScaleWind));
+
+        svgLinea.append("text")
+            .attr("transform", `translate(${width / 2}, ${height - 10})`)
+            .style("text-anchor", "middle")
+            .text("Año");
+
+        svgLinea.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -(height / 2))
+            .attr("y", 15)
+            .style("text-anchor", "middle")
+            .text("Generación Eólica (TWh)");
+    }
+
+    // Funciones para otros gráficos similares...
+    function drawBiomassBarChart() {
+        const width = getWidth("#grafico-barra-biomass");
+        const height = 400;
+
+        const svgBarraBiomass = d3.select("#grafico-barra-biomass")
+            .html("")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const xScale = d3.scaleBand()
+            .domain(data.map(d => d.Year))
+            .range([50, width - 50])
+            .padding(0.1);
+
+        const yScaleBiomass = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d["Geo Biomass Other - TWh"])])
+            .range([height - 50, 50]);
+
+        svgBarraBiomass.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.Year))
+            .attr("y", d => yScaleBiomass(d["Geo Biomass Other - TWh"]))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => height - 50 - yScaleBiomass(d["Geo Biomass Other - TWh"]))
+            .attr("fill", "green");
+
+        svgBarraBiomass.append("g")
+            .attr("transform", `translate(0, ${height - 50})`)
+            .call(d3.axisBottom(xScale));
+
+        svgBarraBiomass.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(yScaleBiomass));
+
+        svgBarraBiomass.append("text")
+            .attr("transform", `translate(${width / 2}, ${height - 10})`)
+            .style("text-anchor", "middle")
+            .text("Año");
+
+        svgBarraBiomass.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -(height / 2))
+            .attr("y", 15)
+            .style("text-anchor", "middle")
+            .text("Generación de Biomasa (TWh)");
+    }
+
+    function drawHydroLineChart() {
+        const width = getWidth("#grafico-linea-hydro");
+        const height = 400;
+
+        const svgLineaHydro = d3.select("#grafico-linea-hydro")
+            .html("")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const xScale = d3.scaleBand()
+            .domain(data.map(d => d.Year))
+            .range([50, width - 50]);
+
+        const yScaleHydro = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d["Hydro Generation - TWh"])])
+            .range([height - 50, 50]);
+
+        const lineHydro = d3.line()
+            .x(d => xScale(d.Year))
+            .y(d => yScaleHydro(d["Hydro Generation - TWh"]));
+
+        svgLineaHydro.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "blue")
+            .attr("stroke-width", 2)
+            .attr("d", lineHydro);
+
+        svgLineaHydro.append("g")
+            .attr("transform", `translate(0, ${height - 50})`)
+            .call(d3.axisBottom(xScale));
+
+        svgLineaHydro.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(yScaleHydro));
+
+        svgLineaHydro.append("text")
+            .attr("transform", `translate(${width / 2}, ${height - 10})`)
+            .style("text-anchor", "middle")
+            .text("Año");
+
+        svgLineaHydro.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -(height / 2))
+            .attr("y", 15)
+            .style("text-anchor", "middle")
+            .text("Generación Hidroeléctrica (TWh)");
+    }
+
+    // Llama a las funciones iniciales
+    drawBarChart();
+    drawLineChart();
+    drawBiomassBarChart();
+    drawHydroLineChart();
+
+    // Actualizar las gráficas al redimensionar la ventana
+})
 
 // Simulador Energético
 document.getElementById("form-simulador").addEventListener("submit", function(event) {
