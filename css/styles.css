@@ -1,4 +1,4 @@
-/* General styles */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -24,7 +24,7 @@ body {
     }
 }
 
-header {
+/* header {
     background-color: #4CAF50;
     color: white;
     padding: 20px;
@@ -35,7 +35,7 @@ h1 {
     margin-bottom: 10px;
     font-weight: 600;
     color: #333;
-}
+} */
     
     
 h2 {
@@ -53,6 +53,8 @@ p {
 
 main {
     padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Ancho máximo en pantallas grandes */
 }
 
 section {
@@ -100,7 +102,7 @@ button {
 
 
 footer {
-    background-color: #333;
+    background-color: #6ea001;
     color: white;
     padding: 10px;
     width: 100%;
@@ -126,3 +128,118 @@ footer {
     color: #fff;
 
 }
+
+header {
+    background-image: url('/images/ATLAS-energia-04-energia-verde.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
+    padding: 40px 20px; 
+    position: relative;
+    text-align: center;
+}
+
+header h1, header .subtitulo {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Efecto de halo */
+    font-weight: bold;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+header .subtitulo {
+    font-size: 1.2em;
+}
+
+#texto-footer {
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Efecto de halo */
+    font-weight: bold;
+}
+
+
+
+/* Ajustes para pantallas medianas */
+@media screen and (max-width: 1200px) {
+    main {
+        max-width: 80%; 
+    }
+}
+
+/* Ajustes para dispositivos pequeños */
+@media screen and (max-width: 768px) {
+    main {
+        max-width: 95%; /* Casi todo el ancho de la pantalla en dispositivos pequeños */
+    }
+}
+
+/* Sección de introducción y propósito */
+#introduccion, #proposito, #apoyo, #contenidos {
+    background-color: #f0f9ff; 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+#introduccion h2, #proposito h2, #apoyo h2, #contenidos h2 {
+    color: #4CAF50;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+#introduccion p, #proposito p, #apoyo p, #contenidos p, #contenidos ul {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+#contenidos ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#contenidos li {
+    background-color: #e3f2fd;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+#contenidos li strong {
+    color: #2c7bba; 
+}
+
+/* Enlace de Talentotech */
+#apoyo a {
+    color: #2c7bba;
+    text-decoration: none;
+}
+
+#apoyo a:hover {
+    text-decoration: underline;
+}
+
+
+#contenidos li:hover {
+    background-color: #bbdefb;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+

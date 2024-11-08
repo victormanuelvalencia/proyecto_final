@@ -235,7 +235,7 @@ document.getElementById("form-simulador").addEventListener("submit", function(ev
     const consumo = document.getElementById("consumo").value;
 
     // Aquí va la lógica para el cálculo energético (ejemplo básico)
-    const resultado = consumo * 0.3; // Ejemplo: 30% puede ser energía renovable
+    const resultado = (consumo * 0.3).toFixed(1); // Redondea a 1 decimal
 
     document.getElementById("resultado-simulador").textContent = `El ${resultado}% de tu consumo podría ser cubierto por energías renovables.`;
 });
